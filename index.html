@@ -39,15 +39,14 @@
                         <input type="number" id="rate" step="0.01" class="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 p-2 border focus:ring-blue-500 focus:border-blue-500" value="150">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">関税率 (%)</label>
+                        <label class="block text-sm font-medium text-gray-700 italic">関税率 (%)</label>
                         <div class="flex items-center gap-3 mt-1">
                             <input type="range" id="tariffRateRange" min="15" max="25" step="0.1" value="20" class="flex-grow h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                             <input type="number" id="tariffRate" step="0.1" class="w-20 rounded-md border-gray-300 bg-gray-50 p-1 text-center border focus:ring-blue-500 focus:border-blue-500" value="20">
                         </div>
-                        <p class="text-[10px] text-gray-400 mt-1 italic">※通常は18.0〜20.0%の範囲で調整してください</p>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">販売希望価格 ($ - 純粋な商品代金)</label>
+                        <label class="block text-sm font-medium text-gray-700">販売希望価格 ($ - 商品代金のみ)</label>
                         <input type="number" id="basePrice" class="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 p-2 border focus:ring-blue-500 focus:border-blue-500" value="500">
                     </div>
                     <div>
@@ -69,17 +68,13 @@
                     <div>
                         <p class="text-sm text-amber-700 mb-1">Start Price (本体価格)</p>
                         <p id="resStartPrice" class="text-3xl font-bold text-amber-900">$530.00</p>
-                        <p class="text-xs text-amber-600">※希望価格 + 本来の送料</p>
+                        <p class="text-xs text-amber-600 font-medium">※販売希望価格 + 本来の送料</p>
                     </div>
                     <hr class="border-amber-200">
                     <div>
                         <p class="text-sm text-amber-700 mb-1">設定すべき関税額 (US送料ポリシー)</p>
                         <p id="resTariff" class="text-3xl font-bold text-amber-900">$100.00</p>
-                        <p id="tariffNote" class="text-xs text-amber-600">※商品代金の20.0%（米国向け送料欄に入力）</p>
-                    </div>
-                    <div class="bg-white p-3 rounded-lg border border-amber-300">
-                        <p class="text-xs font-semibold text-amber-800 underline mb-1">重要：US以外の設定</p>
-                        <p class="text-xs text-amber-700">International Shippingは全て <b>$0.00</b> に設定してください。</p>
+                        <p id="tariffNote" class="text-xs text-amber-600 font-medium">※商品代金の20.0%（米国向け送料欄に入力）</p>
                     </div>
                 </div>
             </div>
@@ -96,39 +91,40 @@
             
             <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6 text-center">
                 <div class="p-3 bg-gray-50 rounded-xl">
-                    <p class="text-xs text-gray-500 mb-1">バイヤー支払総額</p>
+                    <p class="text-[10px] text-gray-500 mb-1">バイヤー支払総額</p>
                     <p id="resTotalPaid" class="font-bold text-sm text-gray-800">$630.00</p>
                 </div>
-                <div class="p-3 bg-gray-50 rounded-xl">
-                    <p class="text-xs text-gray-500 mb-1">eBay手数料(15%)</p>
-                    <p id="resFee" class="font-bold text-sm text-red-500">-$94.50</p>
+                <div class="p-3 bg-gray-50 rounded-xl border border-red-100">
+                    <p class="text-[10px] text-red-500 mb-1 font-semibold">eBay手数料(15%)</p>
+                    <p id="resFee" class="font-bold text-sm text-red-600">-$94.50</p>
+                </div>
+                <div class="p-3 bg-gray-50 rounded-xl border border-red-100">
+                    <p class="text-[10px] text-red-500 mb-1 font-semibold">送料・関税支払合計</p>
+                    <p id="resTotalExpense" class="font-bold text-sm text-red-600">-$130.00</p>
                 </div>
                 <div class="p-3 bg-gray-50 rounded-xl">
-                    <p class="text-xs text-gray-500 mb-1">送料実費</p>
-                    <p id="resShip" class="font-bold text-sm text-red-500">-$30.00</p>
-                </div>
-                <div class="p-3 bg-gray-50 rounded-xl">
-                    <p class="text-xs text-gray-500 mb-1">手残り(USD)</p>
-                    <p id="resNetUsd" class="font-bold text-sm text-blue-600">$505.50</p>
+                    <p class="text-[10px] text-gray-500 mb-1">手残り(USD)</p>
+                    <p id="resNetUsd" class="font-bold text-sm text-blue-600">$405.50</p>
                 </div>
                 <div class="p-3 bg-blue-50 border border-blue-100 rounded-xl">
                     <p class="text-[10px] text-blue-600 mb-1 font-semibold leading-tight">消費税還付予測</p>
                     <p id="resTaxRefund" class="font-bold text-xs text-blue-700">4,090 円</p>
+                    <p class="text-[8px] text-blue-500 mt-1 italic">※利益には含みません</p>
                 </div>
             </div>
 
             <div class="flex items-center justify-between p-4 bg-green-50 rounded-xl border border-green-200">
                 <div>
                     <p class="text-sm text-green-700 font-medium">最終純利益予測 (円)</p>
-                    <p class="text-[10px] text-green-600 leading-tight">※(手残り × 為替) - 仕入れ値 + 消費税還付</p>
+                    <p class="text-[10px] text-green-600 leading-tight">※(手残り × 為替) - 仕入れ値 (還付含まず)</p>
                 </div>
-                <div id="resFinalProfit" class="text-4xl font-black text-green-700 tracking-tighter">34,915 円</div>
+                <div id="resFinalProfit" class="text-4xl font-black text-green-700 tracking-tighter">15,825 円</div>
             </div>
         </div>
         
         <footer class="mt-8 text-center text-gray-400 text-xs space-y-1">
-            <p>※eBay手数料は15%で算出。消費税還付は仕入れ値(税込)÷1.1×0.1で算出しています。</p>
-            <p>※最終利益には還付金が含まれています。</p>
+            <p>※eBay手数料は15%で算出。DDPのため関税額も経費として差し引いています。</p>
+            <p>※消費税還付金は別途発生しますが、上記の利益額には合算していません。</p>
         </footer>
     </div>
 
@@ -158,7 +154,6 @@
             }
         }
 
-        // Handle synchronization between range and number input
         document.getElementById('tariffRateRange').addEventListener('input', (e) => {
             document.getElementById('tariffRate').value = e.target.value;
         });
@@ -175,26 +170,29 @@
 
             // 1. eBay Stock Values
             const startPrice = base + ship;
-            const tariff = base * (tRate / 100);
+            const tariffFee = base * (tRate / 100); // 徴収する関税分
             
             document.getElementById('resStartPrice').innerText = `$${startPrice.toFixed(2)}`;
-            document.getElementById('resTariff').innerText = `$${tariff.toFixed(2)}`;
+            document.getElementById('resTariff').innerText = `$${tariffFee.toFixed(2)}`;
             document.getElementById('tariffNote').innerText = `※商品代金の${tRate.toFixed(1)}%（米国向け送料欄に入力）`;
 
-            // 2. Consumption Tax Refund (Assume 10% from inclusive price)
+            // 2. Consumption Tax Refund (Assume 10% from inclusive price) - Display Only
             const taxRefund = (cost / 1.1) * 0.1;
             document.getElementById('resTaxRefund').innerText = `${Math.floor(taxRefund).toLocaleString()} 円`;
 
-            // 3. Profit Simulation
-            const totalPaid = startPrice + tariff;
-            const fee = totalPaid * 0.15; // 15% Standard Fee
-            const netUsd = totalPaid - fee - ship;
-            const saleProfitJpy = (netUsd * rate) - cost;
-            const finalProfitJpy = saleProfitJpy + taxRefund;
+            // 3. Profit Simulation (DDP)
+            const totalPaid = startPrice + tariffFee; // バイヤーが支払う総額
+            const fee = totalPaid * 0.15; // eBay手数料 (総額に対してかかる)
+            
+            // DDP経費：本来の送料実費 + 配送業者に支払う関税
+            const totalExpense = ship + tariffFee;
+            document.getElementById('resTotalExpense').innerText = `-$${totalExpense.toFixed(2)}`;
+            
+            const netUsd = totalPaid - fee - totalExpense; // 手残り = 総受取額 - 手数料 - (送料+関税)
+            const finalProfitJpy = (netUsd * rate) - cost;
 
             document.getElementById('resTotalPaid').innerText = `$${totalPaid.toFixed(2)}`;
             document.getElementById('resFee').innerText = `-$${fee.toFixed(2)}`;
-            document.getElementById('resShip').innerText = `-$${ship.toFixed(2)}`;
             document.getElementById('resNetUsd').innerText = `$${netUsd.toFixed(2)}`;
             document.getElementById('resFinalProfit').innerText = `${Math.floor(finalProfitJpy).toLocaleString()} 円`;
         }
